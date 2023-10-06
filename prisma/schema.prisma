@@ -1,0 +1,18 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("SUPABASE_DATABASE")
+    directUrl = env("SUPABASE_DIRECT")
+}
+
+model User {
+    id           String   @id @unique
+    name         String?
+    email        String?  @unique
+    image        String?
+    createdAt    DateTime @default(now())
+    groupMembers String[]
+}
