@@ -2,7 +2,7 @@ import NextAuth, { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import prisma from "@/lib/prisma"
 
-const handler: AuthOptions = NextAuth({
+const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID!!,
@@ -12,28 +12,30 @@ const handler: AuthOptions = NextAuth({
 
   callbacks: {
     async signIn({ user }) {
-       try {
-         await prisma.user.upsert({
-           where: {
-             email: user.email ? user.email : "",
-           },
-           update: {
-             ...user,
-             email: user.email ? user.email : "",
-           },
-           create: {
-             ...user,
-             email: user.email ? user.email : "",
-           },
-         });
-       } catch (error) {
-         console.log(error);
-         return false;
-       }
-      
+      try {
+        await prisma.user.upsert({
+          where: {
+            email: user.email ? user.email : "",
+          },
+          update: {
+            ...user,
+            email: user.email ? user.email : "",
+          },
+          create: {
+            ...user,
+            email: user.email ? user.email : "",
+          },
+        });
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+
       return true;
     },
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST }
