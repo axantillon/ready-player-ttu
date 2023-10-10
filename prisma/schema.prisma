@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-    id           String   @unique
+    id           String   @unique 
     name         String?
     email        String   @id @unique
     image        String?
