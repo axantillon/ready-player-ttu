@@ -26,28 +26,28 @@ const UserCard: FC<UserCardProps> = ({ compact = false }) => {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger>
-                <div className="flex flex-col items-start">
-                    <span>Team Leader:</span>
-                    {status === 'authenticated' ? 
-                        <div className='flex flex-col space-y-4'>
-                            <div className={'w-96 p-2 flex space-x-4 items-center justify-between border rounded-md'}>
-                                <Avatar>
-                                    <AvatarImage src={session?.user?.image!!} />
-                                    <AvatarFallback>{session?.user?.name?.charAt(0)}</AvatarFallback>
-                                </Avatar>
-                                <span>{session?.user?.name}</span>
-                                <Button onClick={() => signOut()} className='text-red-500' variant={'outline'}>Log Out</Button>
-                            </div>
-                            {!compact && <>
-                                <TeamMembers leaderEmail={session?.user?.email!!} />
-                            </>}
+            <div className="flex flex-col items-start">
+                <span>Team Leader:</span>
+                {status === 'authenticated' ? 
+                    <DropdownMenuTrigger>
+                    <div className='flex flex-col space-y-4'>
+                        <div className={'w-96 p-2 flex space-x-4 items-center border rounded-md'}>
+                            <Avatar>
+                                <AvatarImage src={session?.user?.image!!} />
+                                <AvatarFallback>{session?.user?.name?.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <span className='flex-1'>{session?.user?.name}</span>
+                            {!compact && <Button onClick={() => signOut()} className='text-red-500' variant={'outline'}>Log Out</Button>}
                         </div>
-                    :
-                        <Button className='w-44' onClick={() => {signIn("google")}}>Log In</Button>
-                    }
-                </div>
-            </DropdownMenuTrigger>
+                        {!compact && <>
+                            <TeamMembers leaderEmail={session?.user?.email!!} />
+                        </>}
+                    </div>
+                </DropdownMenuTrigger>
+                :
+                    <Button className='w-96' onClick={(e) => {signIn("google")}}>Log In</Button>
+                }
+            </div>
             {compact && 
                 <DropdownMenuContent className='w-96'>
                     <DropdownMenuLabel>Team Members</DropdownMenuLabel>

@@ -12,7 +12,7 @@ const fetchKey = async (leaderEmail: string) => {
                 goldKey: true,
             }
         })
-        return key
+        return key?.goldKey
     } catch (e) {
         return null
     }
@@ -24,7 +24,19 @@ export default async function EmeraldKey() {
 
     if (!session?.user) {
         return (
-            <div className=""></div>
+            <div className="">
+                <span>You need to login</span>
+            </div>
+        )
+    }
+
+    const goldKey = await fetchKey(session?.user?.email!!)
+
+    if (!goldKey) {
+        return (
+            <div className="">
+                <span>You need to have the gold key </span>
+            </div>
         )
     }
 

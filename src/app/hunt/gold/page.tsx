@@ -7,7 +7,9 @@ export default async function GoldKey() {
 
     if (!session?.user) {
         return (
-            <div className=""></div>
+            <div className="">
+                <span>You need to login</span>
+            </div>
         )
     }
 
