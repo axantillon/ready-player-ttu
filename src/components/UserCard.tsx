@@ -48,7 +48,7 @@ const UserCard: FC<UserCardProps> = ({ compact = false }) => {
                     </DropdownMenuTrigger>
                 :<>
                     <Button className={cn('w-96 mt-8', compact && 'mt-0')} onClick={() => {signIn("google")}}>Log In</Button>
-                    <span className='w-96 pt-2'>The Team Leader should login with their Google Account!</span>
+                    <span className='w-96 pt-6'>The Team Leader should login with their Google Account!</span>
                 </>}
             </div>
             {compact && 
