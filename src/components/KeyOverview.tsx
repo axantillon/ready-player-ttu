@@ -33,9 +33,9 @@ const KeyOverview: FC = ({}) => {
     }, [keys, status])
 
     const hackathonStarted = DateTime.now() > startTime
-    const hackathonUntilStart = DateTime.now().diff(startTime, 'hours')
+    const hackathonUntilStart = startTime.diff(DateTime.now(), 'hours')
     const hackathonEnded = DateTime.now() > endTime
-    const hackathonUntilEnd = DateTime.now().diff(endTime, 'hours')
+    const hackathonUntilEnd = endTime.diff(DateTime.now(), 'hours')
 
     return (
         <div className={'relative w-full h-full px-8 flex flex-col items-center space-y-8 rounded-md'}>
@@ -46,8 +46,8 @@ const KeyOverview: FC = ({}) => {
                         {status !== 'authenticated' ? 
                             <span>First Log In!</span>
                         :<>
-                            {!hackathonStarted && <span>Hackathon starts in {hackathonUntilStart.hours} hours</span>}
-                            {hackathonEnded && <span>Hackathon ended {hackathonUntilEnd.hours} hours ago</span>}
+                            {!hackathonStarted && <span>Hackathon starts in: <br/> {hackathonUntilStart.hours} hours <br/> till the <span className="text-red-500">HUNT</span> is on!</span>}
+                            {hackathonEnded && <span>Hackathon already ended!</span>}
                         </>}
                     </div>
                 </div>
@@ -91,7 +91,9 @@ const KeyOverview: FC = ({}) => {
                     }
                 </div>
             </div>
-
+            <div className="">
+                {(status === 'authenticated' && hackathonStarted) && <span>There are: {hackathonUntilEnd.hours} hours left!</span>}
+            </div>
         </div>
     )
 }
