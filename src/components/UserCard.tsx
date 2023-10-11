@@ -6,6 +6,7 @@ import { MiniTeamMembers, TeamMembers } from './TeamMembers';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { cn } from '@/lib/utils/cn';
 
 interface UserCardProps {
   compact?: boolean;
@@ -30,22 +31,23 @@ const UserCard: FC<UserCardProps> = ({ compact = false }) => {
                 <span>Team Leader:</span>
                 {status === 'authenticated' ? 
                     <DropdownMenuTrigger>
-                    <div className='flex flex-col space-y-4'>
-                        <div className={'w-96 p-2 flex space-x-4 items-center border rounded-md'}>
-                            <Avatar>
-                                <AvatarImage src={session?.user?.image!!} />
-                                <AvatarFallback>{session?.user?.name?.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <span className='flex-1'>{session?.user?.name}</span>
-                            {!compact && <Button onClick={() => signOut()} className='text-red-500' variant={'outline'}>Log Out</Button>}
+                        <div className='flex flex-col space-y-4'>
+                            <div className={'w-96 p-2 flex space-x-4 items-center border rounded-md'}>
+                                <Avatar>
+                                    <AvatarImage src={session?.user?.image!!} />
+                                    <AvatarFallback>{session?.user?.name?.charAt(0)}</AvatarFallback>
+                                </Avatar>
+                                <span className='flex-1'>{session?.user?.name}</span>
+                                {!compact && <Button onClick={() => signOut()} className='text-red-500' variant={'outline'}>Log Out</Button>}
+                            </div>
+                            {!compact && <>
+                                <TeamMembers leaderEmail={session?.user?.email!!} />
+                                <span className='w-96 text-start pt-6'>Be sure to add all your team members before the hackahton ends!</span>
+                            </>}
                         </div>
-                        {!compact && <>
-                            <TeamMembers leaderEmail={session?.user?.email!!} />
-                        </>}
-                    </div>
-                </DropdownMenuTrigger>
+                    </DropdownMenuTrigger>
                 :
-                    <Button className='w-96' onClick={(e) => {signIn("google")}}>Log In</Button>
+                    <Button className={cn('w-96 mt-8', compact && 'mt-0')} onClick={() => {signIn("google")}}>Log In</Button>
                 }
             </div>
             {compact && 

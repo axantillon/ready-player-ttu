@@ -6,11 +6,11 @@ export default function Hunt() {
 
 
     return (
-        <div className="w-full h-full px-12 flex">
+        <div className="w-full h-full px-12 mt-8 flex space-x-6">
             <div className="">
                 <UserCard />
             </div>
-            <div className="flex-1 h-full pl-12 pb-24">
+            <div className="flex-1 h-full pb-24">
                 <KeyOverview />
             </div>
         </div>

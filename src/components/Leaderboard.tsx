@@ -20,18 +20,19 @@ const Leaderboard: FC<LeaderboardProps> = ({ serverTeams }) => {
                 schema: 'public',
                 table: 'User'
             }, payload => {
-                const mergedTeams: User[] = teams.includes(payload.new as User) 
-                    ? 
-                        [...teams, payload.new as User]
-                    :   
-                        teams.map(team => {
+                switch (payload.eventType) {
+                    case 'INSERT':
+                        setTeams([...teams, payload.new as User])
+                        break;
+                    case 'UPDATE':
+                        setTeams(teams.map(team => {
                             if (team.id === (payload.new as any).id) {
                                 return payload.new as User
                             }
                             return team
-                        })
-                    ; 
-                setTeams(mergedTeams)
+                        }))
+                        break;
+                }
             }).subscribe()
 
         return () => {

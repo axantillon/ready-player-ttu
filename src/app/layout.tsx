@@ -1,10 +1,12 @@
+import { cn } from '@/lib/utils/cn'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+import { VT323 } from 'next/font/google'
 
-const font = localFont({
-  src: '../lib/assets/font/rdp.ttf',
-  display: 'swap'
+const font = VT323({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -19,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={cn(font.className, 'text-lg')}>{children}</body>
     </html>
   )
 }

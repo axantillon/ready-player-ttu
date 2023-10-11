@@ -1,12 +1,14 @@
 'use client'
-import { useSession } from 'next-auth/react'
-import { FC, useEffect, useState } from 'react'
-import { Button } from './ui/button'
-import { useRouter } from 'next/navigation'
+import { DateTime } from "luxon"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { FC, useEffect, useState } from "react"
+import { Button } from "./ui/button"
+import { cn } from "@/lib/utils/cn"
 
-interface KeyOverviewProps {
 
-}
+const startTime = DateTime.fromISO(process.env.NEXT_PUBLIC_HACKATHON_START || '')
+const endTime = DateTime.fromISO(process.env.NEXT_PUBLIC_HACKATHON_END || '')
 
 interface Keys {
     goldKey: boolean,
@@ -14,7 +16,7 @@ interface Keys {
     crystalKey: boolean,
 }
 
-const KeyOverview: FC<KeyOverviewProps> = ({  }) => {
+const KeyOverview: FC = ({}) => {
 
     const { status } = useSession()
     const [keys, setKeys] = useState<Keys | null>(null)
@@ -30,20 +32,26 @@ const KeyOverview: FC<KeyOverviewProps> = ({  }) => {
         }
     }, [keys, status])
 
-    if (status === 'unauthenticated' || status === 'loading') return (
-        <div className={'w-full h-full p-8 bg-black/25 rounded-md'}>
-            <span>First Log In!</span>
-        </div>
-    )
-
-    if (keys === null) return (
-        <div className={'w-full h-full p-8 bg-black/25 rounded-md'}>
-            <span>Loading...</span>
-        </div>
-    )
+    const hackathonStarted = DateTime.now() > startTime
+    const hackathonUntilStart = DateTime.now().diff(startTime, 'hours')
+    const hackathonEnded = DateTime.now() > endTime
+    const hackathonUntilEnd = DateTime.now().diff(endTime, 'hours')
 
     return (
-        <div className={'w-full h-full p-8 flex flex-col space-y-8 rounded-md'}>
+        <div className={'relative w-full h-full px-8 flex flex-col items-center space-y-8 rounded-md'}>
+
+            {(status === 'unauthenticated' || status === 'loading' || !hackathonStarted || hackathonEnded) && 
+                <div className="absolute w-full h-full z-10 flex items-center justify-center bg-black/30 rounded-md">
+                    <div className="p-20 rounded-lg bg-white">
+                        {status !== 'authenticated' ? 
+                            <span>First Log In!</span>
+                        :<>
+                            {!hackathonStarted && <span>Hackathon starts in {hackathonUntilStart.hours} hours</span>}
+                            {hackathonEnded && <span>Hackathon ended {hackathonUntilEnd.hours} hours ago</span>}
+                        </>}
+                    </div>
+                </div>
+            }
 
             <div className="flex items-center justify-between w-full h-20 px-6 border rounded-md">
                 <div className="">
@@ -53,7 +61,7 @@ const KeyOverview: FC<KeyOverviewProps> = ({  }) => {
                     {keys?.goldKey ?
                         <Button>Got it!</Button>
                     :
-                        <Button onClick={() => router.push('/hunt/gold')} className='bg-green-500 hover:bg-green-600'>Hunt</Button>
+                        <Button onClick={() => router.push('/hunt/gold')} className='bg-yellow-400 hover:bg-yellow-500'>Hunt</Button>
                     }
                 </div>
             </div>
@@ -66,7 +74,7 @@ const KeyOverview: FC<KeyOverviewProps> = ({  }) => {
                     {keys?.emeraldKey ?
                         <Button>Got it!</Button>
                     :
-                        <Button disabled={!keys?.goldKey} onClick={() => router.push('/hunt/emerald')} className='bg-green-500 hover:bg-green-600'>Hunt</Button>
+                        <Button disabled={!keys?.goldKey} onClick={() => router.push('/hunt/emerald')} className={cn('bg-green-400 hover:bg-green-500', !keys?.goldKey && 'cursor-not-allowed')}>Hunt</Button>
                     }   
                 </div>
             </div>
@@ -79,7 +87,7 @@ const KeyOverview: FC<KeyOverviewProps> = ({  }) => {
                     {keys?.crystalKey ?
                         <Button>Got it!</Button>
                     :
-                        <Button disabled={!keys?.emeraldKey} onClick={() => router.push('/hunt/crystal')} className='bg-green-500 hover:bg-green-600'>Hunt</Button>
+                        <Button disabled={!keys?.emeraldKey} onClick={() => router.push('/hunt/crystal')} className={cn('bg-cyan-400 hover:bg-cyan-500', !keys?.emeraldKey && 'cursor-not-allowed')}>Hunt</Button>
                     }
                 </div>
             </div>
