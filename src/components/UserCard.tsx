@@ -1,4 +1,5 @@
 'use client'
+import { cn } from '@/lib/utils/cn';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { FC } from 'react';
@@ -6,7 +7,6 @@ import { MiniTeamMembers, TeamMembers } from './TeamMembers';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
-import { cn } from '@/lib/utils/cn';
 
 interface UserCardProps {
   compact?: boolean;
@@ -46,9 +46,10 @@ const UserCard: FC<UserCardProps> = ({ compact = false }) => {
                             </>}
                         </div>
                     </DropdownMenuTrigger>
-                :
+                :<>
                     <Button className={cn('w-96 mt-8', compact && 'mt-0')} onClick={() => {signIn("google")}}>Log In</Button>
-                }
+                    <span className='pt-2'>The Team Leader should login with their Google Account!</span>
+                </>}
             </div>
             {compact && 
                 <DropdownMenuContent className='w-96'>
