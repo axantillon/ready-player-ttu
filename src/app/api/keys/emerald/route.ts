@@ -35,7 +35,7 @@ export async function GET(
         },
         data: {
           emeraldKey: true,
-          emeraldKeyAcquired: new Date(),
+          emeraldKeyTime: new Date(),
         },
       });
 

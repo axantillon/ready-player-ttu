@@ -35,7 +35,7 @@ export async function GET(
         },
         data: {
           crystalKey: true,
-          crystalKeyAcquired: new Date(),
+          crystalKeyTime: new Date(),
         },
       });
 

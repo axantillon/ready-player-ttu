@@ -10,8 +10,11 @@ import { startTime, endTime } from "@/lib/utils/consts"
 
 interface Keys {
     goldKey: boolean,
+    goldKeyTime: string,
     emeraldKey: boolean,
+    emeraldKeyTime: string,
     crystalKey: boolean,
+    crystalKeyTime: string,
 }
 
 const KeyOverview: FC = ({}) => {
@@ -50,8 +53,9 @@ const KeyOverview: FC = ({}) => {
             }
 
             <div className="flex items-center justify-between w-full h-20 px-6 border rounded-md">
-                <div className="">
+                <div className="flex flex-col justify-center -space-y-1">
                     <span>Gold Key</span>
+                    {keys?.goldKeyTime && <span className="text-sm text-black/50">Acquired on {DateTime.fromISO(keys?.goldKeyTime).toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS)}</span>}
                 </div>
                 <div className="">
                     {keys?.goldKey ?
@@ -63,8 +67,9 @@ const KeyOverview: FC = ({}) => {
             </div>
 
             <div className="flex items-center justify-between w-full h-20 px-6 border rounded-md">
-                <div className="">
+                <div className="flex flex-col justify-center -space-y-1">
                     <span>Emerald Key</span>
+                    {keys?.emeraldKeyTime && <span className="text-sm text-black/50">Acquired on {DateTime.fromISO(keys?.emeraldKeyTime).toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS)}</span>}
                 </div>
                 <div className="">
                     {keys?.emeraldKey ?
@@ -76,8 +81,9 @@ const KeyOverview: FC = ({}) => {
             </div>
 
             <div className="flex items-center justify-between w-full h-20 px-6 border rounded-md">
-                <div className="">
+                <div className="flex flex-col justify-center -space-y-1">
                     <span>Crystal Key</span>
+                    {keys?.crystalKeyTime && <span className="text-sm text-black/50">Acquired on {DateTime.fromISO(keys?.crystalKeyTime).toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS)}</span>}
                 </div>
                 <div className="">
                     {keys?.crystalKey ?
@@ -87,6 +93,13 @@ const KeyOverview: FC = ({}) => {
                     }
                 </div>
             </div>
+
+            {keys?.crystalKey && 
+                <div className="flex flex-col items-center justify-center w-full p-10">
+                    <span className="text-6xl text-red-500">CONGRATULATIONS! 🎉🎉🎉🎉</span>
+                    <span className="text-5xl">You found the Egg... <br/> You are officially Ready... Player <span className="text-red-500">TTU</span></span>
+                </div>
+            }
         </div>
     )
 }

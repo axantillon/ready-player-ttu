@@ -17,8 +17,11 @@ export async function GET(request: Request) {
             },
             select: {
                 goldKey: true,
+                goldKeyTime: true,
                 emeraldKey: true,
+                emeraldKeyTime: true,
                 crystalKey: true,
+                crystalKeyTime: true
             }
         })
         return Response.json(keys);

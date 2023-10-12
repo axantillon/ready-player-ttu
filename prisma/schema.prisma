@@ -9,17 +9,17 @@ datasource db {
 }
 
 model User {
-    id                 String    @unique
-    name               String?
-    email              String    @id @unique
-    image              String?
-    createdAt          DateTime  @default(now())
-    groupMembers       String[]
-    groupName          String   @default("")
-    goldKey            Boolean   @default(false)
-    goldKeyAcquired    DateTime?
-    emeraldKey         Boolean   @default(false)
-    emeraldKeyAcquired DateTime?
-    crystalKey         Boolean   @default(false)
-    crystalKeyAcquired DateTime?
+    id             String    @unique
+    name           String?
+    email          String    @id @unique
+    image          String?
+    createdAt      DateTime  @default(now())
+    groupMembers   String[]
+    groupName      String    @default("")
+    goldKeyTime    DateTime?
+    goldKey        Boolean   @default(false)
+    emeraldKeyTime DateTime?
+    emeraldKey     Boolean   @default(false)
+    crystalKeyTime DateTime?
+    crystalKey     Boolean   @default(false)
 }
