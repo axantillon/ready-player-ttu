@@ -23,7 +23,7 @@ const Countdown: FC<CountdownProps> = ({ deadline }) => {
 
     return (<>
        {isClient ? 
-            <span>{countdown.days} Days, {countdown.hours} Hours & {countdown.seconds?.toFixed(0)} Seconds</span> 
+            <span>{countdown.days !== 0 && (countdown.days + ' Days, ')}{countdown.hours} Hours & {countdown.seconds?.toFixed(0)} Seconds</span> 
         : <></> }
     </>)
 }
