@@ -20,10 +20,12 @@ const KeyInput: FC<KeyInputProps> = ({ Key }) => {
     }
 
     return (
-        <div className="">
-            <Input disabled={success} value={keyAttempt} onChange={(e) => setKeyAttempt(e.target.value)} placeholder={`Enter the ${Key} Key...`} />
-            <Button onClick={() => attemptKey()}>Claim</Button>
-            {success && <span>You got it!</span>}
+        <div className="flex flex-col space-y-2">
+            <div className="flex space-x-2">
+                <Input disabled={success} value={keyAttempt} onChange={(e) => setKeyAttempt(e.target.value)} placeholder={`Enter the ${Key} Key...`} />
+                <Button onClick={() => attemptKey()}>Claim</Button>
+            </div>
+            {success && <span>You got it! 🎉 <br/> <b>Now hurry back to the previous screen!</b></span>}
             {error && <span>Try again!</span>}
             {loading && <span>Trying...</span>}
         </div>

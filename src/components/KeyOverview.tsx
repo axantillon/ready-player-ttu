@@ -1,14 +1,12 @@
 'use client'
+import { cn } from "@/lib/utils/cn"
 import { DateTime } from "luxon"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { FC, useEffect, useState } from "react"
+import Countdown from "./Countdown"
 import { Button } from "./ui/button"
-import { cn } from "@/lib/utils/cn"
-
-
-const startTime = DateTime.fromISO(process.env.NEXT_PUBLIC_HACKATHON_START || '')
-const endTime = DateTime.fromISO(process.env.NEXT_PUBLIC_HACKATHON_END || '')
+import { startTime, endTime } from "@/lib/utils/consts"
 
 interface Keys {
     goldKey: boolean,
@@ -33,9 +31,7 @@ const KeyOverview: FC = ({}) => {
     }, [keys, status])
 
     const hackathonStarted = DateTime.now() > startTime
-    const hackathonUntilStart = startTime.diff(DateTime.now(), 'hours')
     const hackathonEnded = DateTime.now() > endTime
-    const hackathonUntilEnd = endTime.diff(DateTime.now(), 'hours')
 
     return (
         <div className={'relative w-full h-full px-8 flex flex-col items-center space-y-8 rounded-md'}>
@@ -46,7 +42,7 @@ const KeyOverview: FC = ({}) => {
                         {status !== 'authenticated' ? 
                             <span>First Log In!</span>
                         :<>
-                            {!hackathonStarted && <span>Hackathon starts in: <br/> {hackathonUntilStart.hours} hours <br/> till the <span className="text-red-500">HUNT</span> is on!</span>}
+                            {!hackathonStarted && <span>Hackathon starts in: <br/> <Countdown deadline={startTime} /> <br/> The <span className="text-red-500">HUNT</span> is nearly on!</span>}
                             {hackathonEnded && <span>Hackathon already ended!</span>}
                         </>}
                     </div>
@@ -90,9 +86,6 @@ const KeyOverview: FC = ({}) => {
                         <Button disabled={!keys?.emeraldKey} onClick={() => router.push('/hunt/crystal')} className={cn('bg-cyan-400 hover:bg-cyan-500', !keys?.emeraldKey && 'cursor-not-allowed')}>Hunt</Button>
                     }
                 </div>
-            </div>
-            <div className="">
-                {(status === 'authenticated' && hackathonStarted) && <span>There are: {hackathonUntilEnd.hours} hours left!</span>}
             </div>
         </div>
     )

@@ -9,7 +9,7 @@ export default function Home() {
       <span className="w-2/3">During this hackathon you and your team members will compete against all the other <span className="text-red-500">TTU</span> players in a quest to find all three hidden keys</span>
 
       <ol>
-        <ul>The <span className="text-yellow-400">gold</span> key </ul>
+        <ul>The <span className="text-yellow-400">Gold</span> key </ul>
         <ul>The <span className="text-green-400">Emerald</span> key </ul>
         <ul>The <span className="text-cyan-400">Crystal</span> key </ul>
       </ol>
