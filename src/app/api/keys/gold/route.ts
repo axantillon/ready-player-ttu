@@ -1,7 +1,12 @@
 import { NextRequest } from "next/server";  
 import prisma from "@/lib/prisma";
+import { isHackathonOver, isHackathonStarted } from "@/lib/utils/consts";
 
 export async function GET(request: NextRequest, { params }: { params: { leaderEmail: string } }) {
+
+    if (isHackathonOver || !isHackathonStarted) {
+        return new Response('Hackathon is shut down', { status: 400 });
+    }
 
     const attempt = request.nextUrl.searchParams.get('attempt');
     const leaderEmail = request.nextUrl.searchParams.get("leaderEmail");
