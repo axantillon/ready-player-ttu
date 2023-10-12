@@ -21,7 +21,7 @@ export async function GET(
         groupName: true,
       },
     });
-    return Response.json(team === null ? {} : team?.groupName);
+    return Response.json(team === null ? '' : team?.groupName);
   } catch (error) {
     console.log(error);
     return Response.error();
@@ -52,7 +52,7 @@ export async function POST(
         groupName: true,
       },
     });
-    return Response.json(team === null ? {} : team?.groupName);
+    return Response.json(team === null ? '' : team?.groupName);
   } catch (error) {
     console.log(error);
     return Response.error();

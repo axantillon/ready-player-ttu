@@ -21,7 +21,7 @@ export async function GET(
         groupMembers: true,
       },
     });
-    return Response.json(team === null ? {} : team?.groupMembers);
+    return Response.json(team === null ? [] : team?.groupMembers);
   } catch (error) {
     console.log(error);
     return Response.error();
@@ -54,7 +54,7 @@ export async function POST(
         groupMembers: true,
       },
     });
-    return Response.json(team === null ? {} : team?.groupMembers);
+    return Response.json(team === null ? [] : team?.groupMembers);
   } catch (error) {
     console.log(error);
     return Response.error();
@@ -84,7 +84,7 @@ export async function DELETE(
         },
       },
     });
-    return Response.json(team === null ? {} : team?.groupMembers);
+    return Response.json(team === null ? [] : team?.groupMembers);
   } catch (error) {
     console.log(error);
     return Response.error();
