@@ -33,6 +33,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ serverTeams }) => {
                         }))
                         break;
                 }
+                console.log(payload)
             }).subscribe()
 
         return () => {
