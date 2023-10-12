@@ -23,12 +23,21 @@ export const MiniTeamMembers: FC<TeamMembersProps> = ({ leaderEmail }) => {
 
 export const TeamMembers: FC<TeamMembersProps> = ({ leaderEmail }) => {
 
-    const { teamMembers, addTeamMember, removeTeamMember } = useTeamMembers(leaderEmail)
+    const { teamMembers, addTeamMember, removeTeamMember, changeTeamName, teamName } = useTeamMembers(leaderEmail)
     const [newTeamMember, setNewTeamMember] = useState<string>('')
+
+    const [newTeamName, setNewTeamName] = useState<string>('')
 
     return (
         <div className={'flex flex-col'}>
-            <span>Team Members:</span>
+            <div className="flex flex-col w-full">
+                <span>Team Name: <span className='text-red-500 font-bold'>{teamName}</span></span>
+                <div className="flex space-x-2 w-full">
+                    <Input value={newTeamName} onChange={(e) => {setNewTeamName(e.target.value)}} placeholder={'Name your Squad'} />
+                    <Button className='bg-green-500 hover:bg-green-600' onClick={() => {changeTeamName(newTeamName); setNewTeamName('')}}> Change </Button>
+                </div>
+            </div>
+            <span className='mt-4'>Team Members:</span>
             {teamMembers ? teamMembers.map((member, index) => (
                 <div key={index} className={'p-2 mb-2 flex space-x-4 items-center justify-between border rounded-md'}>
                     <span>{member}</span>

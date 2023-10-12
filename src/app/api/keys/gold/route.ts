@@ -35,6 +35,7 @@ export async function GET(
         },
         data: {
           goldKey: true,
+          goldKeyAcquired: new Date(),
         },
       });
 

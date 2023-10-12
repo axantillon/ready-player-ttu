@@ -1,22 +1,34 @@
 import { useEffect, useState } from "react";
-import prisma from "../prisma";
 
 export default function useTeamMembers(leaderEmail: string) {
   const [teamMembers, setTeamMembers] = useState<string[] | null | undefined>(
     null
   );
+  const [teamName, setTeamName] = useState<string | null | undefined>(null);
 
   useEffect(() => {
     const fetchTeamMembers = async () => {
-      const members = await fetch(`/api/team/${leaderEmail}`).then((res) =>
-        res.json()
+      const members = await fetch(`/api/team/${leaderEmail}`).then(
+        (res) => res.json()
       );
       setTeamMembers(members);
     };
+
+    const fetchTeamName = async () => {
+      const teamName = await fetch(`/api/team/name/${leaderEmail}`).then(
+        (res) => res.json()
+      );
+      setTeamName(teamName);
+    };
+
     if (teamMembers === null && leaderEmail) {
       fetchTeamMembers();
     }
-  }, [teamMembers, leaderEmail]);
+
+    if (teamName === null && leaderEmail) {
+      fetchTeamName();
+    }
+  }, [teamMembers, leaderEmail, teamName]);
 
   const addTeamMember = async (name: string) => {
     try {
@@ -45,5 +57,23 @@ export default function useTeamMembers(leaderEmail: string) {
     }
   };
 
-  return { teamMembers, addTeamMember, removeTeamMember };
+  const changeTeamName = async (name: string) => {
+    try {
+      const teamName = await fetch(`/api/team/name/${leaderEmail}`, {
+        method: "POST",
+        body: JSON.stringify({ name }),
+      }).then((res) => res.json());
+      setTeamName(teamName);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return {
+    teamMembers,
+    addTeamMember,
+    removeTeamMember,
+    teamName,
+    changeTeamName,
+  };
 }
