@@ -7,7 +7,13 @@ export async function GET(
   { params }: { params: { leaderEmail: string } }
 ) {
   if (isHackathonOver || !isHackathonStarted) {
-    return new Response("Hackathon is shut down", { status: 400 });
+    return new Response(
+      JSON.stringify({
+        error: true,
+        message: "Hackathon is shut down",
+      }),
+      { status: 400 }
+    );
   }
 
   const attempt = request.nextUrl.searchParams.get("attempt");
@@ -15,7 +21,10 @@ export async function GET(
   const key = process.env.CRYSTAL_KEY;
 
   if (!attempt || !key || !leaderEmail) {
-    return new Response("No key or attempt provided", { status: 400 });
+    return new Response(
+      JSON.stringify({ error: true, message: "No Key or Attempt provided" }),
+      { status: 400 }
+    );
   }
 
   if (attempt.toLocaleLowerCase() === key.toLocaleLowerCase() && leaderEmail) {

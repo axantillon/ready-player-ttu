@@ -13,7 +13,7 @@ interface KeyInputProps {
 const KeyInput: FC<KeyInputProps> = ({ Key }) => {
 
     const [keyAttempt, setKeyAttempt] = useLocalStorage<string>(Key, "");
-    const { loading, error, success, tryKey} = useTryKey(Key)
+    const { loading, error, errMessage, success, tryKey} = useTryKey(Key)
 
     const attemptKey = async () => {
         await tryKey(keyAttempt)
@@ -26,7 +26,7 @@ const KeyInput: FC<KeyInputProps> = ({ Key }) => {
                 <Button onClick={() => attemptKey()}>Claim</Button>
             </div>
             {success && <span>You got it! 🎉 <br/> <b>Now hurry back to the previous screen!</b></span>}
-            {error && <span>Try again!</span>}
+            {error && <span>Try again! {errMessage}</span>}
             {loading && <span>Trying...</span>}
         </div>
     )
