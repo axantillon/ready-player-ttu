@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-import Leaderboard from "@/components/Leaderboard";
+import Leaderboard from "@/components/Scoreboard";
 import prisma from "@/lib/prisma";
 
 const fetchLeaderboard = async () => {

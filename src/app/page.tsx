@@ -18,8 +18,8 @@ export default function Home() {
         <Button className="text-xl"> Enter the Hunt </Button>
       </Link>
 
-      <Link href="/leaderboard">
-        <Button size={'sm'}> Leaderboard </Button>
+      <Link href="/scoreboard">
+        <Button size={'sm'}> Scoreboard </Button>
       </Link>
     </main>
   )

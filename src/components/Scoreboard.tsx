@@ -21,7 +21,7 @@ import { sortTeams } from '@/lib/utils/sortTeams'
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!!)
 
-interface LeaderboardProps {
+interface ScoreboardProps {
     serverTeams: User[]
 }
 
@@ -29,7 +29,7 @@ export type SortedTeams = User & {
     score: number
 }
 
-const Leaderboard: FC<LeaderboardProps> = ({ serverTeams }) => {
+const Scoreboard: FC<ScoreboardProps> = ({ serverTeams }) => {
 
     const [teams, setTeams] = useState<SortedTeams[]>(sortTeams(serverTeams))
 
@@ -98,4 +98,4 @@ const Leaderboard: FC<LeaderboardProps> = ({ serverTeams }) => {
     )
 }
 
-export default Leaderboard;
+export default Scoreboard;

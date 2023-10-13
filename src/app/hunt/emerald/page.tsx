@@ -56,7 +56,7 @@ export default async function EmeraldKey() {
             <div className="w-full flex flex-col items-center justify-center space-y-10">
                 <div className="flex flex-col space-y-4">
                     <span className="text-3xl">This is the Emerald key</span>
-                    <span className="text-4xl text-green-500"> hints hints hints </span>
+                    <span className="text-4xl text-green-500"> clues clues clues </span>
                 </div>
                 <div className="w-1/2">
                     <KeyInput Key="emerald"/>
