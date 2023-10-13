@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
 import Leaderboard from "@/components/Scoreboard";
 import prisma from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
 
 const fetchLeaderboard = async () => {
     const teams = await prisma.user.findMany()
