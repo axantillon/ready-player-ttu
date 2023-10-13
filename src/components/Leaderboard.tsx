@@ -65,19 +65,19 @@ const Leaderboard: FC<LeaderboardProps> = ({ serverTeams }) => {
         <Table className='my-[2vw] text-white'>
             <TableCaption>Ready Player TTU Leaderboard</TableCaption>
             <TableHeader>
-                <TableRow>
-                    <TableHead className='ont-medium text-center'> Rank </TableHead>
-                    <TableHead className="font-medium">Team name</TableHead>
-                    <TableHead className="font-medium text-center">Group members</TableHead>
-                    <TableHead className="font-medium text-center">Keys</TableHead>
-                    <TableHead className="font-medium text-center">Score</TableHead>
+                <TableRow >
+                    <TableHead className='font-medium text-green-500'> Rank </TableHead>
+                    <TableHead className="font-medium text-green-500">Team name</TableHead>
+                    <TableHead className="font-medium text-center text-green-500">Group members</TableHead>
+                    <TableHead className="font-medium text-center text-green-500">Keys</TableHead>
+                    <TableHead className="font-medium text-center text-green-500">Score</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {teams.map((team, index) => (
-                    <TableRow className='h-auto' key={index}>
+                    <TableRow className={cn("text-sky-500 h-auto", index === 0 && 'text-amber-300', index === 1 && 'text-orange-400', index === 2 || index === 3 || index === 4 && 'text-red-600')} key={index}>
                         <TableCell className='font-medium' id='rank'> {index+1} </TableCell>
-                        <TableCell className={cn("font-medium", index === 0 && 'text-amber-300')} id='team-name'>{team.name}</TableCell>
+                        <TableCell className={"font-medium"} id='team-name'>{team.name}</TableCell>
                         <TableCell className='font-medium text-center ' id='group-members'>
                             {team.groupMembers !== null && team.groupMembers.map((member, count) => (
                                 <div key = {count} className='inline-flex mx-[1vw]'>{member} </div>
@@ -88,9 +88,9 @@ const Leaderboard: FC<LeaderboardProps> = ({ serverTeams }) => {
                             <KeyIcon color={team.emeraldKey ? '#4ADE80':'#404040'}/>
                             <KeyIcon color={team.crystalKey ? '#22D3EE':'#404040'}/>
                         </TableCell>
-                        <TableHead className="font-medium text-center" id='score'>
+                        <TableCell className="font-medium text-center" id='score'>
                             {team.score}
-                        </TableHead>
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
