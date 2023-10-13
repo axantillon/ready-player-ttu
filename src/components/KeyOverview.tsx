@@ -1,12 +1,12 @@
 'use client'
 import { cn } from "@/lib/utils/cn"
+import { isHackathonOver, isHackathonStarted, startTime } from "@/lib/utils/consts"
 import { DateTime } from "luxon"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { FC, useEffect, useState } from "react"
 import Countdown from "./Countdown"
 import { Button } from "./ui/button"
-import { startTime, endTime } from "@/lib/utils/consts"
 
 interface Keys {
     goldKey: boolean,
@@ -33,20 +33,17 @@ const KeyOverview: FC = ({}) => {
         }
     }, [keys, status])
 
-    const hackathonStarted = DateTime.now() > startTime
-    const hackathonEnded = DateTime.now() > endTime
-
     return (
         <div className={'relative w-full h-full px-8 flex flex-col items-center space-y-8 rounded-md'}>
 
-            {(status === 'unauthenticated' || status === 'loading' || !hackathonStarted || hackathonEnded) && 
+            {(status === 'unauthenticated' || status === 'loading' || !isHackathonStarted || isHackathonOver) && 
                 <div className="absolute w-full h-full z-10 flex items-center justify-center bg-black/30 rounded-md">
                     <div className="p-20 rounded-lg bg-white">
                         {status !== 'authenticated' ? 
                             <span>First Log In!</span>
                         :<>
-                            {!hackathonStarted && <span>Hackathon starts in: <br/> <Countdown deadline={startTime} /> <br/> The <span className="text-red-500">HUNT</span> is nearly on!</span>}
-                            {hackathonEnded && <span>Hackathon already ended!</span>}
+                            {!isHackathonStarted && <span>Hackathon starts in: <br/> <Countdown deadline={startTime} /> <br/> The <span className="text-red-500">HUNT</span> is nearly on!</span>}
+                            {isHackathonOver && <span>Hackathon already ended!</span>}
                         </>}
                     </div>
                 </div>
@@ -98,6 +95,13 @@ const KeyOverview: FC = ({}) => {
                 <div className="flex flex-col items-center justify-center w-full p-10">
                     <span className="text-6xl text-red-500">CONGRATULATIONS! 🎉🎉🎉🎉</span>
                     <span className="text-5xl">You found the Egg... <br/> You are officially Ready... Player <span className="text-red-500">TTU</span></span>
+                    <div className="text-sm">
+                        <span>You acquired the <span className='text-yellow-400'>Gold</span> Key in <Countdown deadline={DateTime.fromISO(keys?.goldKeyTime!! as unknown as string)} from={startTime} update={false} /> </span>
+                        <br/>
+                        <span>You acquired the <span className='text-green-400'>Emerald</span> Key in <Countdown deadline={DateTime.fromISO(keys?.emeraldKeyTime!! as unknown as string)} from={startTime} update={false} /> </span>
+                        <br/>
+                        <span>You acquired the <span className='text-cyan-400'>Crystal</span> Key in <Countdown deadline={DateTime.fromISO(keys?.crystalKeyTime!! as unknown as string)} from={startTime} update={false} /> </span>
+                    </div>
                 </div>
             }
         </div>

@@ -20,7 +20,6 @@ export default async function GoldKey() {
 
     return (
         <div className="flex flex-col w-screen px-10 space-y-10">
-            <span className="hidden">THE KEY IS HFJDHF</span>
             <Link href={'/hunt'}>
                 <Button variant={'ghost'}>{'<-- Go Back'}</Button>
             </Link>
