@@ -59,7 +59,6 @@ const Scoreboard: FC<ScoreboardProps> = ({ serverTeams }) => {
                         })))
                         break;
                 }
-                console.log(payload)
             }).subscribe()
 
         return () => {

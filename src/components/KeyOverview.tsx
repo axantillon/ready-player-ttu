@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation"
 import { FC, useEffect, useState } from "react"
 import Countdown from "./Countdown"
 import { Button } from "./ui/button"
+import Image from 'next/image'
+import GoldenEgg from '@/lib/assets/goldEgg.png'
 
 interface Keys {
     goldKey: boolean,
@@ -92,9 +94,14 @@ const KeyOverview: FC = ({}) => {
             </div>
 
             {keys?.crystalKey && 
-                <div className="flex flex-col items-center justify-center w-full p-10">
-                    <span className="text-6xl text-red-500">CONGRATULATIONS! 🎉🎉🎉🎉</span>
-                    <span className="text-5xl">You found the Egg... <br/> You are officially Ready... Player <span className="text-red-500">TTU</span></span>
+                <div className="flex w-full space-x-4">
+                    <div className="flex flex-col w-2/3 space-y-6">
+                        <span className="text-lg text-red-500">CONGRATULATIONS! 🎉🎉🎉🎉</span>
+                        <span>You found the Egg... <br/> You are officially Ready... Player <span className="text-red-500">TTU</span></span>
+                        <div className="relative w-24 h-24 aspect-square mx-auto">
+                            <Image src={GoldenEgg} alt='' fill />
+                        </div>
+                    </div>
                     <div className="text-sm">
                         <span>You acquired the <span className='text-yellow-400'>Gold</span> Key in <Countdown deadline={DateTime.fromISO(keys?.goldKeyTime!! as unknown as string)} from={startTime} update={false} /> </span>
                         <br/>

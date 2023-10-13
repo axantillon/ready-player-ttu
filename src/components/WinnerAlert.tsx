@@ -15,8 +15,6 @@ interface WinnerAlertProps {
 
 const WinnerAlert: FC<WinnerAlertProps> = ({ open, winner, setOpen }) => {
 
-    console.log(winner)
-
     return (
         <AlertDialog open={open}>
             <AlertDialogContent>
