@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import { calculateScore } from "./calculateScore";
-import { SortedTeams } from "@/components/Leaderboard";
+import { SortedTeams } from "@/components/Scoreboard";
 
 export const sortTeams = (teams: User[]) => {
 
