@@ -75,7 +75,7 @@ const Scoreboard: FC<ScoreboardProps> = ({ serverTeams }) => {
             </TableHeader>
             <TableBody>
                 {teams.map((team, index) => (
-                    <TableRow className={cn("text-sky-500 h-auto", index === 0 && 'text-amber-300', index === 1 && 'text-orange-400', index === 2 || index === 3 || index === 4 && 'text-red-600')} key={index}>
+                    <TableRow className={cn("text-red-600", index === 0 && 'text-amber-300', index === 1 && 'text-orange-400', index > 4 && 'text-sky-400')} key={index}>
                         <TableCell className='font-medium' id='rank'> {index+1} </TableCell>
                         <TableCell className={"font-medium"} id='team-name'>{team.name}</TableCell>
                         <TableCell className='font-medium text-center ' id='group-members'>
