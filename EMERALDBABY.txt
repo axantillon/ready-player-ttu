@@ -1,1 +1,0 @@
-The emerald key is: git-commit

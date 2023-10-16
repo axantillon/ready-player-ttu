@@ -1,6 +1,7 @@
 import KeyInput from '@/components/KeyInput'
 import { Button } from '@/components/ui/button'
 import prisma from '@/lib/prisma'
+import { HistoryIcon, KeyIcon } from 'lucide-react'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 
@@ -54,9 +55,18 @@ export default async function EmeraldKey() {
                 <Button variant={'ghost'}>{'<-- Go Back'}</Button>
             </Link>
             <div className="w-full flex flex-col items-center justify-center space-y-10">
-                <div className="flex flex-col space-y-4">
-                    <span className="text-3xl">This is the Emerald key</span>
-                    <span className="text-4xl text-green-500"> clues clues clues </span>
+                <div className="flex flex-col space-y-10">
+                    <span className="flex items-center text-2xl">Welcome to the <KeyIcon className="mx-4 w-10 h-10 text-green-500"/> <span className="text-red-500">hunt</span>!</span>
+                    <div className='flex flex-col'>
+                        <span>Sometimes, all it takes is following <Link href={'https://github.com/ttu-cr-stl/ready-player-ttu'} className="text-green-500">links.</Link></span> 
+                        <span>Perhaps, further back in <span className="text-green-500">history</span>. </span>
+                        <div className='flex items-center space-x-4'>
+                            <span>Rewind </span>
+                            <HistoryIcon className='text-green-500' />
+                        </div> 
+                        <span>Find the <span className="text-green-500">changes</span> the creators have made.</span>
+                        <span>Maybe, remember Alice and follow the <span className="text-green-500">cat.</span></span>
+                    </div>
                 </div>
                 <div className="w-1/2">
                     <KeyInput Key="emerald"/>
