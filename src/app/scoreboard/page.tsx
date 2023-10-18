@@ -24,6 +24,7 @@ export default async function LeaderboardPage() {
                 <Link href={'/'}>
                     <span className="text-2xl">hello, <br/> ready player <span className="text-red-500">ttu</span></span>
                 </Link>
+                <span>https://ready-player-ttu.vercel.app</span>
                 <ScoreboardCountdown />
                 <div className="w-5/6 p-6 bg-black rounded-xl">
                     <Scoreboard serverTeams={teams} />
