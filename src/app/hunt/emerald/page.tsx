@@ -56,7 +56,7 @@ export default async function EmeraldKey() {
             </Link>
             <div className="w-full flex flex-col items-center justify-center space-y-10">
                 <div className="flex flex-col space-y-10">
-                    <span className="flex items-center text-2xl">Welcome to the <KeyIcon className="mx-4 w-10 h-10 text-green-500"/> <span className="text-red-500">hunt</span>!</span>
+                    <span className="flex items-center text-2xl">Welcome to the <span className="text-red-500">hunt</span> for the <KeyIcon className="mx-4 w-10 h-10 text-green-500"/>!</span>
                     <div className='flex flex-col'>
                         <span>Sometimes, all it takes is following <Link href={'https://github.com/ttu-cr-stl/ready-player-ttu'} className="text-green-500">links.</Link></span> 
                         <span>Perhaps, further back in <span className="text-green-500">history</span>. </span>
@@ -75,3 +75,7 @@ export default async function EmeraldKey() {
         </div>
     )
 }
+
+
+
+
