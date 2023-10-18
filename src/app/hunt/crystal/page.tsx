@@ -68,7 +68,7 @@ export default async function CrystalKey() {
                 <div className="flex flex-col max-w-[60vw] space-y-8 text-center">
                     <span className="flex items-center text-2xl justify-center">Welcome to the <span className="text-red-500 mx-3"> hunt </span> for the <KeyIcon className="mx-4 w-10 h-10 text-cyan-500"/>!</span>
                     <div className='flex flex-col'>
-                        <span>I am composed of <span className="text-cyan-500">three</span> and reside lost among our grounds.</span>
+                        <span>I am composed of <span className="text-cyan-500">three digits</span> and reside lost among our grounds.</span>
                         <span><span className="text-cyan-500">Tales</span> have been told in markings on the wall around which way round I go.</span>
                     </div>
                 </div>
